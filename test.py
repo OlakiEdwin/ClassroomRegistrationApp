@@ -505,7 +505,7 @@ class ResetScreen(Screen):
 class SignupScreen(Screen):
     pass
 
-class Example(MDApp):
+class ClassCheckInApp(MDApp):
 
     def build(self):
         screen_manager = ScreenManager()
@@ -518,5 +518,5 @@ class Example(MDApp):
         return Builder.load_string(KV)
 
 
-Example().run()
+ClassCheckInApp().run()
 
