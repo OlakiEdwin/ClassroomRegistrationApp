@@ -608,17 +608,30 @@ ScreenManager:
     MDScreen:
         md_bg_color: 1, 1, 1, 1
     
-    MDIconButton:
-        icon: "arrow-left"
-        pos_hint: {"center_y": .95}
-        user_font_size: "30sp"
-        theme_text_color: "Custom"
-        text_color: rgba(26, 24, 58, 255)
-        on_release:
-            root.manager.transition.direction = "right"
-            root.manager.current = "studentSetup"
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"center_y": .95}
+            user_font_size: "30sp"
+            theme_text_color: "Custom"
+            text_color: rgba(26, 24, 58, 255)
+            on_release:
+                root.manager.transition.direction = "right"
+                root.manager.current = "studentSetup"
+                
+        MDButton:
+            style: "filled"
+            theme_width: "Custom"
+            height: "40dp"
+            size_hint: .66, .065
+            pos_hint: {"center_x": .5, "center_y": .18}
+            on_release:
+                root.manager.transition.direction = "left"
+                root.manager.current = ""
     
-        
+            MDButtonText:
+                id: text
+                text: "GO TO WEEKLY SCHEDULE"
+                pos_hint: {"center_x": .5, "center_y": .5}
 '''
 
 class MainScreen(Screen):
