@@ -19,7 +19,7 @@ ScreenManager:
 <MainScreen>
     name: "main"
     MDScreen:
-        md_bg_color: 1, 1, 1, 
+        md_bg_color: 1, 1, 1, 1
         
         MDLabel:
             text: "Choose your Role!"
