@@ -13,8 +13,6 @@ ScreenManager:
     LoginScreen:
     ResetScreen:
     SignupScreen:
-    StudentSetupScreen:
-    StudentDetailsScreen:
 
 <MainScreen>
     name: "main"
@@ -494,144 +492,6 @@ ScreenManager:
                 id: text
                 text: "SIGN IN"
                 pos_hint: {"center_x": .5, "center_y": .5}
-                
-<StudentSetupScreen>:
-    name: "studentSetup"
-    
-    MDScreen:
-        md_bg_color: 1, 1, 1, 1
-        
-        ScrollView:  
-            MDBoxLayout:
-                orientation: "vertical"
-                spacing: "10dp"
-                size_hint_y: None
-                height: self.minimum_height
-    
-                MDLabel:
-                    text: "Edit Profile"
-                    halign: "center"
-                    valign: "center"
-                    bold: True
-                    size_hint_y: None
-                    height: "40dp"
-                    color: rgba(34, 34, 34, 255)
-    
-                MDCard:
-                    orientation: "vertical"
-                    padding: "8dp"
-                    size_hint: None, None
-                    size: "290dp", "100dp"
-                    pos_hint: {"center_x": .5, "center_y": .85}
-    
-                    Image:
-                        source: "assets/boy.png"
-                        size_hint: .5, .8
-                        pos_hint: {"center_x": .5, "center_y": .85}
-    
-                MDButton:
-                    pos_hint: {"center_x": .5, "center_y": .68}
-    
-                    MDButtonText:
-                        text: "Edit profile photo"
-    
-                MDBoxLayout:
-                    orientation: "vertical"
-                    spacing: "7dp"
-                    adaptive_height: True
-                    size_hint_x: .9
-                    pos_hint: {"center_x": .5, "center_y": .3}
-    
-                    MDLabel:
-                        text: "Name"
-                        bold: True
-                        size_hint_y: None
-                        height: "10dp"
-    
-                    MDTextField:
-                        mode: "outlined"
-    
-                    MDLabel:
-                        text: "Course"
-                        bold: True
-                        size_hint_y: None
-                        height: "10dp"
-    
-                    MDTextField:
-                        mode: "outlined"
-    
-                    MDLabel:
-                        text: "Year of Study"
-                        bold: True
-                        size_hint_y: None
-                        height: "10dp"
-    
-                    MDTextField:
-                        mode: "outlined"
-    
-                    MDLabel:
-                        text: "Registration Number"
-                        bold: True
-                        size_hint_y: None
-                        height: "10dp"
-    
-                    MDTextField:
-                        mode: "outlined"
-    
-                    MDLabel:
-                        text: "Student Number"
-                        bold: True
-                        size_hint_y: None
-                        height: "10dp"
-    
-                    MDTextField:
-                        mode: "outlined"
-    
-                MDButton:
-                    style: "filled"
-                    theme_width: "Custom"
-                    height: "40dp"
-                    size_hint: .66, .065
-                    pos_hint: {"center_x": .5, "center_y": .18}
-                    on_release:
-                        root.manager.transition.direction = "left"
-                        root.manager.current = "studentDetails"
-    
-                    MDButtonText:
-                        id: text
-                        text: "SUBMIT"
-                        pos_hint: {"center_x": .5, "center_y": .5}
-                        
-<StudentDetailsScreen>:
-    name: "studentDetails"
-    
-    MDScreen:
-        md_bg_color: 1, 1, 1, 1
-    
-        MDIconButton:
-            icon: "arrow-left"
-            pos_hint: {"center_y": .95}
-            user_font_size: "30sp"
-            theme_text_color: "Custom"
-            text_color: rgba(26, 24, 58, 255)
-            on_release:
-                root.manager.transition.direction = "right"
-                root.manager.current = "studentSetup"
-                
-        MDButton:
-            style: "filled"
-            theme_width: "Custom"
-            height: "40dp"
-            size_hint: .66, .065
-            pos_hint: {"center_x": .5, "center_y": .18}
-            on_release:
-                root.manager.transition.direction = "left"
-                root.manager.current = ""
-    
-            MDButtonText:
-                id: text
-                text: "GO TO WEEKLY SCHEDULE"
-                pos_hint: {"center_x": .5, "center_y": .5}
 '''
 
 class MainScreen(Screen):
@@ -649,12 +509,6 @@ class ResetScreen(Screen):
 class SignupScreen(Screen):
     pass
 
-class StudentSetupScreen(Screen):
-    pass
-
-class StudentDetailsScreen(Screen):
-    pass
-
 class ClassCheckInApp(MDApp):
 
     def build(self):
@@ -664,35 +518,7 @@ class ClassCheckInApp(MDApp):
         screen_manager.add_widget(LoginScreen(name="login"))
         screen_manager.add_widget(ResetScreen(name="reset"))
         screen_manager.add_widget(SignupScreen(name="signup"))
-        screen_manager.add_widget(StudentSetupScreen(name="studentSetup"))
-        screen_manager.add_widget(StudentDetailsScreen(name="studentDetails"))
 
         return Builder.load_string(KV)
-
-    def show_details(self):
-        name = self.root.ids.name_field.text
-        course = self.root.ids.course_field.text
-        year = self.root.ids.year_field.text
-        reg_number = self.root.ids.reg_field.text
-        student_number = self.root.ids.student_field.text
-
-        student_details_screen = StudentDetailsScreen()
-        student_details_screen.ids.student_details_list.add_widget(
-            MDLabel(text=f"Name: {name}", size_hint_y=None, height=40)
-        )
-        student_details_screen.ids.student_details_list.add_widget(
-            MDLabel(text=f"Course: {course}", size_hint_y=None, height=40)
-        )
-        student_details_screen.ids.student_details_list.add_widget(
-            MDLabel(text=f"Year of Study: {year}", size_hint_y=None, height=40)
-        )
-        student_details_screen.ids.student_details_list.add_widget(
-            MDLabel(text=f"Registration Number: {reg_number}", size_hint_y=None, height=40)
-        )
-        student_details_screen.ids.student_details_list.add_widget(
-            MDLabel(text=f"Student Number: {student_number}", size_hint_y=None, height=40)
-        )
-
-        self.root.add_widget(student_details_screen)
 
 ClassCheckInApp().run()
